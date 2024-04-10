@@ -58,6 +58,17 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
   //return res.status(300).json({message: "Yet to be implemented"});
 });
 
+regd_users.delete("/auth/review/:isbn", (req, res) => {
+    //Write your code here
+    const isbn = req.params.isbn;
+    let filtered_books_by_isbn = books[isbn];
+    if ( filtered_books_by_isbn.length !== 0 ) {
+      delete books[isbn]
+    }
+    return res.send("The ISBN book is deleted");
+    //return res.status(300).json({message: "Yet to be implemented"});
+  });
+
 module.exports.authenticated = regd_users;
 module.exports.isValid = isValid;
 module.exports.users = users;
