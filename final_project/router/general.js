@@ -21,34 +21,60 @@ public_users.post("/register", (req,res) => {
 // Get the book list available in the shop
 public_users.get('/',function (req, res) {
   //Write your code here
-  res.send(Object.values(books));
+  myPromise = new Promise((resolve,reject) => {
+    resolve("promise resolved")
+  });
+
+  myPromise.then((successMessage) => {
+    res.send(Object.values(books));
+  })
+  //res.send(Object.values(books));
   //return res.status(300).json({message: "Yet to be implemented"});
 });
 
 // Get book details based on ISBN
 public_users.get('/isbn/:isbn',function (req, res) {
   //Write your code here
-  const isbn = req.params.isbn;
-  let filtered_books_by_isbn = books[isbn];
-  res.send(filtered_books_by_isbn);
+  myPromise = new Promise((resolve,reject) => {
+    resolve("promise resolved")
+  });
+
+  myPromise.then((successMessage) => {
+    const isbn = req.params.isbn;
+    let filtered_books_by_isbn = books[isbn];
+    res.send(filtered_books_by_isbn);
+  })
   //return res.status(300).json({message: "Yet to be implemented"});
  });
   
 // Get book details based on author
 public_users.get('/author/:author',function (req, res) {
   //Write your code here
-  const author = req.params.author;
-  let filtered_books_by_author = Object.values(books).filter((book) => book.author === author);
-  res.send({filtered_books_by_author});
+  myPromise = new Promise((resolve,reject) => {
+    resolve("promise resolved")
+  });
+
+  myPromise.then((successMessage) => {
+    const author = req.params.author;
+    let filtered_books_by_author = Object.values(books).filter((book) => book.author === author);
+    res.send({filtered_books_by_author});
+  })
   //return res.status(300).json({message: "Yet to be implemented"});
 });
 
 // Get all books based on title
 public_users.get('/title/:title',function (req, res) {
   //Write your code here
-  const title = req.params.title;
-  let filtered_books_by_title = Object.values(books).filter((book) => book.title === title);
-  res.send({filtered_books_by_title});
+  myPromise = new Promise((resolve,reject) => {
+    resolve("promise resolved")
+  });
+
+  myPromise.then((successMessage) => {
+    const title = req.params.title;
+    let filtered_books_by_title = Object.values(books).filter((book) => book.title === title);
+    res.send({filtered_books_by_title});
+  })
+
   //return res.status(300).json({message: "Yet to be implemented"});
 });
 
