@@ -7,16 +7,38 @@ let users = [];
 
 const isValid = (username)=>{ //returns boolean
 //write code to check is the username is valid
+  let filtered_users_by_username = users.filter((user) => user.username === username);
+  return filtered_users_by_username.length > 0;
 }
 
 const authenticatedUser = (username,password)=>{ //returns boolean
 //write code to check if username and password match the one we have in records.
+let filtered_users_by_username_and_password = users.filter((user) => (user.username === username) && (user.password === password));
+return filtered_users_by_username_and_password.length > 0;
 }
 
 //only registered users can login
 regd_users.post("/login", (req,res) => {
   //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  const username = req.body.username;
+  if (! isValid(username)) {
+    return res.status(404).json({message: "Username is not exist."});
+  }
+
+  const password = req.body.password;
+  if (! authenticatedUser(username, password)) {
+    return res.status(404).json({message: "It's not matched between username and password."});
+  }
+
+  let accessToken = jwt.sign({
+      data: username
+    }, 'access', { expiresIn: 60 * 60 });
+
+    req.session.authorization = {
+      accessToken
+  }
+  return res.status(200).send("User successfully logged in");
+  //return res.status(300).json({message: "Yet to be implemented"});
 });
 
 // Add a book review
