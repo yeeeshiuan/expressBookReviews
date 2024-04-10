@@ -21,8 +21,8 @@ public_users.get('/',function (req, res) {
 public_users.get('/isbn/:isbn',function (req, res) {
   //Write your code here
   const isbn = req.params.isbn;
-  let filtered_books = Object.values(books).filter((book) => book.isbn === isbn);
-  res.send(filtered_books);
+  let filtered_books_by_isbn = books[isbn];
+  res.send(filtered_books_by_isbn);
   //return res.status(300).json({message: "Yet to be implemented"});
  });
   
@@ -30,8 +30,8 @@ public_users.get('/isbn/:isbn',function (req, res) {
 public_users.get('/author/:author',function (req, res) {
   //Write your code here
   const author = req.params.author;
-  let filtered_books = Object.values(books).filter((book) => book.author === author);
-  res.send(filtered_books);
+  let filtered_books_by_author = Object.values(books).filter((book) => book.author === author);
+  res.send({filtered_books_by_author});
   //return res.status(300).json({message: "Yet to be implemented"});
 });
 
@@ -39,15 +39,18 @@ public_users.get('/author/:author',function (req, res) {
 public_users.get('/title/:title',function (req, res) {
   //Write your code here
   const title = req.params.title;
-  let filtered_books = Object.values(books).filter((book) => book.title === title);
-  res.send(filtered_books);
+  let filtered_books_by_title = Object.values(books).filter((book) => book.title === title);
+  res.send({filtered_books_by_title});
   //return res.status(300).json({message: "Yet to be implemented"});
 });
 
 //  Get book review
 public_users.get('/review/:isbn',function (req, res) {
   //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  const isbn = req.params.isbn;
+  let filtered_books_by_isbn = books[isbn];
+  res.send(filtered_books_by_isbn['reviews']);
+  //return res.status(300).json({message: "Yet to be implemented"});
 });
 
 module.exports.general = public_users;
